@@ -27,7 +27,7 @@ else
       if [ -f ".tasks/$task_name.task" ]; then
          echo "ERROR: Task with name '$task_name' already exists.";
       else
-         date --iso-8601=minutes >> .tasks/$task_name.task;
+         date >> .tasks/$task_name.task;
          echo "Created task: '$task_name'";
       fi;
 
