@@ -1,5 +1,17 @@
 #!/bin/bash
 
+function check_dirs() {
+   if [ ! -d ".tasks" ]; then
+      mkdir .tasks;
+   fi
+
+   if [ ! -d ".task_bin" ]; then
+      mkdir .task_bin;
+   fi
+}
+
+check_dirs;
+
 if [ "$#" -eq 0 ]; then
    echo "";
    echo "--> Run with flag -h for options.";
