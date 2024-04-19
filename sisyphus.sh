@@ -10,12 +10,12 @@ else
    if [ "$inpt_flag" = "-n" ]; then
 
       task_name=$2;
-      FILE=tasks/$task_name.task;
+      FILE=.tasks/$task_name.task;
 
       if [ -f "$FILE" ]; then
          echo "ERROR: Task with name '$task_name' already exists.";
       else
-         date --iso-8601=minutes >> tasks/$task_name.task;
+         date --iso-8601=minutes >> .tasks/$task_name.task;
          echo "Created task: '$task_name'";
       fi;
 
@@ -23,10 +23,10 @@ else
 
       task_name=$2;
 
-      FILE=tasks/$task_name.task;
+      FILE=.tasks/$task_name.task;
 
       if [ -f "$FILE" ]; then
-         rm tasks/$task_name.task;
+         mv .tasks/$task_name.task .task_bin/$task_name.task;
          echo "Moved task '$task_name' to the task bin.";
       else
          echo "ERROR: Task with name '$task_name' does not exist.";
@@ -38,11 +38,11 @@ else
       if [ -z "$2" ]; then 
          echo "ERROR: -view must be supplied with a non-empty task name.";
       else
-         FILE=tasks/$task_name.task;
+         FILE=.tasks/$task_name.task;
 
          if [ -f "$FILE" ]; then
             echo $task_name;
-            cat tasks/$task_name.task;
+            cat .tasks/$task_name.task;
          else
             echo "ERROR: Task with name '$task_name' does not exist.";
          fi
@@ -50,7 +50,7 @@ else
 
    elif [ "$inpt_flag" = "-tasks" ]; then
       echo "";
-      ls -1 tasks/*.task | sed -e "s/\.task$//";
+      ls -1 .tasks/*.task | sed -e "s/\.task$//";
       echo "";
 
    elif [ "$inpt_flag" = "-help" ]; then
